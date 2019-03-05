@@ -1,0 +1,29 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Workout extends Model
+{
+    //
+	public function challenge(){
+		return $this->belongsTo('App\Challenge');
+	}
+
+	public function submissions(){
+		return $this->hasMany('App\Submission');
+	}
+
+	public function creator(){
+		return $this->belongsTo('App\User');
+	}
+
+	public function comments(){
+		return $this->morphToMany('App\Comment', 'commentable');
+	}
+
+	public function exercises(){
+		return $this->belongsToMany('App\Exercise');
+	}
+}
