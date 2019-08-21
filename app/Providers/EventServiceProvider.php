@@ -71,6 +71,12 @@ class EventServiceProvider extends ServiceProvider
         'Laravel\Spark\Events\Teams\UserInvitedToTeam' => [
             'Laravel\Spark\Listeners\Teams\CreateInvitationNotification',
         ],
+        'App\Events\UserEarnedExperience' => [
+            'App\Listeners\CheckForLevelIncrease',
+        ],
+        'App\Events\ChallengeHasStarted' => [
+            'App\Listeners\NotifyUsersOfChallengeStart'
+        ] 
     ];
 
     /**

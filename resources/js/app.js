@@ -18,6 +18,30 @@ require('spark-bootstrap');
 
 require('./components/bootstrap');
 
+import VueI18n from 'vue-i18n';//needed for calendar locale
+
+import Sortable from 'vue-sortable';
+
+Vue.use(Sortable);
+
+Vue.use(VueI18n);
+
+Vue.use(require('vue-moment'));
+ 
+import {messages} from 'vue-bootstrap4-calendar'; // you can include your own translation here if you want!
+
+import BootstrapVue from 'bootstrap-vue';
+
+Vue.use(BootstrapVue);
+
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+ 
+window.i18n = new VueI18n({
+    locale: 'en',
+    messages
+});
+
 var app = new Vue({
-    mixins: [require('spark')]
+    mixins: [require('spark')],
+    i18n
 });

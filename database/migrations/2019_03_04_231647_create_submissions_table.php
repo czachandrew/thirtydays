@@ -15,6 +15,15 @@ class CreateSubmissionsTable extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('workout_id');
+            $table->integer('challenge_id'); 
+            $table->integer('user_id'); 
+            $table->string('image')->nullable();
+            $table->string('type');
+            $table->string('description')->nullable();
+            $table->string('time')->nullable(); 
+            $table->string('score')->nullable(); 
+            $table->boolean('completed')->default(false);
             $table->timestamps();
         });
     }

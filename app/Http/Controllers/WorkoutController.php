@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Workout;
+use App\Challenge;
+use App\ChallengeDay;
 use Illuminate\Http\Request;
 
 class WorkoutController extends Controller
@@ -22,9 +24,37 @@ class WorkoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Challenge $challenge)
     {
-        //
+        $workoutData = request('workout');
+        $videos = request('videos');
+        $order = request('order');
+        $attach = request('attach');
+        $workout = Workout::create($workoutData);
+        if($attach === true){
+            $challenge->addDay();
+        }
+        // $challenge = Challenge::find($challengeId);
+        // $challenge->workouts()->save($workout, ['order' => $order]);
+        return $workout;
+    }
+
+    public function getScores(ChallengeDay $challengeday){
+        $submissions = $challengeday->workout->submissions->load(['user','bumps']);
+        return $submissions;
+
+    }
+
+    public function createWorkoutAndAttach(ChallengeDay $challengeday){
+        $workoutData = request('workout');
+        $videos = request('videos');
+        $order = request('order');
+        $attach = request('attach');
+        $workout = Workout::create($workoutData);
+        $challengeday->workout_id = $workout->id; 
+        $challengeday->save();
+        $challengeday->load('workout');
+        return $challengeday;
     }
 
     /**

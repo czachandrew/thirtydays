@@ -11,6 +11,7 @@ use Laravel\Spark\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Laravel\Spark\Contracts\Interactions\Auth\Register;
 use Laravel\Spark\Contracts\Http\Requests\Auth\RegisterRequest;
+use App\Progression;
 
 class RegisterController extends Controller
 {
@@ -59,6 +60,8 @@ class RegisterController extends Controller
         Auth::login($user = Spark::interact(
             Register::class, [$request]
         ));
+
+        $user->progression()->save(new Progression());
 
         event(new UserRegistered($user));
 

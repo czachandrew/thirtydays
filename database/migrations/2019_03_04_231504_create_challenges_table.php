@@ -17,8 +17,10 @@ class CreateChallengesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('image'); 
+            $table->integer('creator_id');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('status')->default('new');
             $table->string('type')->default('public');
             $table->timestamps();

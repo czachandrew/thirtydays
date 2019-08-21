@@ -13,8 +13,11 @@ class CreateCommentableTable extends Migration
      */
     public function up()
     {
-        Schema::create('commentable', function (Blueprint $table) {
+        Schema::create('commentables', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('comment_id');
+            $table->integer('commentable_id');
+            $table->string('commentable_type');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateCommentableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commentable');
+        Schema::dropIfExists('commentables');
     }
 }

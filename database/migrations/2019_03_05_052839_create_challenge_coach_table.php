@@ -15,6 +15,8 @@ class CreateChallengeCoachTable extends Migration
     {
         Schema::create('challenge_coach', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('coach_id');
+            $table->integer('challenge_id');
             $table->timestamps();
         });
     }

@@ -24,7 +24,14 @@ class ExerciseController extends Controller
      */
     public function create()
     {
-        //
+        $videos = request('videos');
+        $exercise = request('exercise');
+
+        //create the exercise first
+
+        $newExercise = Exercise::create($exercise);
+
+        return $newExercise;
     }
 
     /**

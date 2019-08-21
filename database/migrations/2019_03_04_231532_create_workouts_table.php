@@ -13,8 +13,15 @@ class CreateWorkoutsTable extends Migration
      */
     public function up()
     {
+        //measurement types: For Time, For Reps, For Load, For Distance, For Completion 
         Schema::create('workouts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('title'); 
+            $table->string('gif');
+            $table->text('description');
+            $table->string('type');
+            $table->string('type_label');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -6,9 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Workout extends Model
 {
+	protected $guarded = [];
     //
 	public function challenge(){
-		return $this->belongsTo('App\Challenge');
+		return $this->belongsToMany('App\Challenge');
+	}
+
+	public function order(){
+		
+	}
+
+	public function days(){
+		return $this->belongsToMany('App\ChallengeDay');
 	}
 
 	public function submissions(){

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Submission;
+
 use Illuminate\Http\Request;
+use Auth;
 
 class SubmissionController extends Controller
 {
@@ -26,6 +28,8 @@ class SubmissionController extends Controller
     {
         //
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -70,6 +74,13 @@ class SubmissionController extends Controller
     public function update(Request $request, Submission $submission)
     {
         //
+    }
+
+    public function comment(Submission $submission){
+        $user = Auth('user');
+        $comment = request('comment');
+        $comment['user_id'] = $user->id;
+        $submission->addComment(request('comment'));
     }
 
     /**
