@@ -18,6 +18,8 @@ Route::group([
 
     Route::get('/friends', 'FriendController@get');
 
+    Route::get('/friends/qrcode/{friend}', 'FriendController@qrCodeBefriend');
+
     Route::post('/friends/request/send', 'FriendController@sendRequest');
 
     Route::get('/friends/request/accept/{sender}', 'FriendController@acceptRequest');
@@ -81,4 +83,6 @@ Route::group([
     Route::post('/comments/{entity}/{entityId}', 'CommentController@addComment');
 
     Route::get('/users/list', 'FriendController@listUsers');
+
+    Route::post('/search/users', 'SearchController@searchUsers');
 });
