@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Progression;
+use Exception;
 use Log;
 use Hash;
 
@@ -16,9 +18,14 @@ class SignupController extends Controller
 		$user->name = $request->name;
 		$user->email = $request->email; 
 		$user->password = Hash::make($request->password);
-		$user->save();
-		$progression = new Progression();
-		$user->progression()->save($progression);
+		try {
+			$user->save();
+			$progression = new Progression();
+			$user->progression()->save($progression);
+		} catch(Exception $ex) {
+			return response()->json(['error' => $ex->errorInfo], 500);
+		}
+		
 		return $user;
 	}
 }
