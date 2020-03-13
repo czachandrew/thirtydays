@@ -34,5 +34,9 @@ class Reward extends Model
         return $query->where('status', 'active')->where('stock', '>', 0);
     }
 
+    public function media(){
+        return $this->morphMany('App\Media', 'mediable');
+    }
+
 
 }

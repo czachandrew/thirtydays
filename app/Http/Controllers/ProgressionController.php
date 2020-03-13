@@ -7,6 +7,7 @@ use App\User;
 use App\Progression;
 use App\Reward;
 use App\Krate;
+use App\ExperienceEvent;
 use Auth;
 use Log;
 
@@ -20,15 +21,15 @@ class ProgressionController extends Controller
 	public function index(){
 		//This is just to show the test progression page 
 		$user = Auth::user();
-		$user->load('progression','rewards','krates');
+		$user->load('progression','rewards','krates', 'kratespaces');
 		$myKrates = $user->openableKrates;
-		$myKrates = $myKrates->groupBy('krate.title');
+		$myKrates = $myKrates->groupBy('krate.title'); 
 		return view('progression.index', compact('user', 'myKrates'));
 	}
 
 	public function superdata(){
 		$user = Auth::user();
-		$user->load('progression','rewards', 'krates');
+		$user->load('progression','rewards', 'krates','kratespaces', 'kratespaces.groups', 'kratespaces.groups.tasks','usertasks');
 		$user->myKrates = $user->openableKrates->groupBy('krate.title');
 		$user->rewards()->orderBy('user_reward.id', 'desc')->get();
 		$friends = $user->getFriends();
@@ -54,6 +55,10 @@ class ProgressionController extends Controller
 		// $sorted = $user->rewards()->available()->get();
 		// $user->rewards = $sorted;
 		return $user;
+	}
+
+	public function createExperienceEvent(Request $request) {
+
 	}
 
 

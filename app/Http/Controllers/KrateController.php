@@ -7,6 +7,7 @@ use App\UserKrate;
 use App\Reward;
 use Illuminate\Http\Request;
 use Auth;
+use Log;
 
 class KrateController extends Controller
 {
@@ -107,7 +108,7 @@ class KrateController extends Controller
         return $reward; 
     }
 
-    public function getReward($rank, $type = 'all'){
+    public function getReward($rank, $type = 'all', $space_id = null){
         $user = Auth::user();
         $rewards = Reward::where('rank', $rank)->available()->get();
         $total = $rewards->count();
@@ -121,6 +122,8 @@ class KrateController extends Controller
     public function buy(Krate $krate){
         $user = Auth::user(); 
         $user->load('progression');
+        Log::info($user->progression->current_xp);
+        Log::info($krate->cost);
         if($user->progression->current_xp >= $krate->cost){
             $user->progression->buyKrate($krate);
             return $user->latestKrate;
@@ -129,6 +132,25 @@ class KrateController extends Controller
         }
         
 
+    }
+
+    public function buyAndOpen( Request $request){
+        Log::info($request->krate['id']);
+       // Log::info(Krate::find($request->krate["id"])->first());
+
+        $myKrate = $this->buy(Krate::find($request->krate["id"]));
+        Log::info("Here is the krate collection");
+        Log::info($myKrate);
+        
+        Log::info("here is the userkrate");
+        Log::info($myKrate);
+        if($myKrate === 'Not enough funds'){
+            return "Not enough funds";
+        }
+        $myKrate = UserKrate::find($myKrate[0]['id']);
+
+        $reward = $this->open($myKrate);
+        return $reward;
     }
 
     /**

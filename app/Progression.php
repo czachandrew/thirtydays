@@ -100,4 +100,8 @@ class Progression extends Model
 		return $this;
 	}
 
+	public function experienceEvents(){
+		return $this->hasMany('App\ExperienceEvent');
+	}
+
 }

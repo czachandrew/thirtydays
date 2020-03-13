@@ -83,6 +83,12 @@ class User extends SparkUser
         return $this;
     }
 
+    /** These are krate tasks that the user has completed , hate this name */
+
+    public function usertasks(){
+        return $this->hasMany('App\Usertask');
+    }
+
     public function bumps(){
         return $this->hasMany('App\Bump');
     }
@@ -105,6 +111,28 @@ class User extends SparkUser
 
     public function latestKrate(){
         return $this->hasMany('App\UserKrate')->with('krate')->latest()->limit(1);
+    }
+
+    public function experienceEvents(){
+        return $this->hasMany('App\ExperienceEvent');
+    }
+
+    public function mykratespace(){
+        return $this->hasOne('App\Kratespace');
+    }
+
+    public function kratespaces(){
+        return $this->belongsToMany('App\Kratespace', 'kratespace_user');
+    }
+
+    public function groups(){
+        return $this->belongsToMany('App\Zonegroup', 'user_zonegroup');
+    }
+
+    public function joinKratespace($space) {
+        $this->kratespaces()->attach($space);
+
+        return $this;
     }
 
     // ngrok http -subdomain=andogrando -host-header=rewrite thirtydays.test:80

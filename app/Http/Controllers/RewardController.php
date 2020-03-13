@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Reward;
 use Auth;
 use App\User;
+use Log;
 
 use Illuminate\Http\Request;
 
@@ -21,6 +22,21 @@ class RewardController extends Controller
     	$user = Auth::user();
     	$user->load('providedRewards');
     	return $user->providedRewards;
+    }
+
+    public function save(Request $request){
+        $data = $request->all();
+        
+        Log::info($data);
+        $reward = Reward::create($data['reward']);
+        
+        
+        if($request->media){
+
+            $reward->media()->create($data['media']);
+        }
+
+        return $reward;
     }
 
     public function create(Request $request){

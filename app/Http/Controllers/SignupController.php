@@ -18,6 +18,7 @@ class SignupController extends Controller
 		$user->name = $request->name;
 		$user->email = $request->email; 
 		$user->password = Hash::make($request->password);
+		$user->type =  $request->type;
 		try {
 			$user->save();
 			$progression = new Progression();
@@ -26,6 +27,6 @@ class SignupController extends Controller
 			return response()->json(['error' => $ex->errorInfo], 500);
 		}
 		
-		return $user;
+		return $user->load('progression');
 	}
 }
