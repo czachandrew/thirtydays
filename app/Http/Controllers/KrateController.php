@@ -111,6 +111,7 @@ class KrateController extends Controller
     public function getReward($rank, $type = 'all', $space_id = null){
         $user = Auth::user();
         $rewards = Reward::where('rank', $rank)->available()->get();
+        Log::info($rewards);
         $total = $rewards->count();
         $select = (mt_rand(1, $total) -1 );
         $reward = $rewards[$select];
