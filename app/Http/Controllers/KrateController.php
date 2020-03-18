@@ -138,7 +138,7 @@ class KrateController extends Controller
         Log::info($request->krate['id']);
        // Log::info(Krate::find($request->krate["id"])->first());
 
-        $myKrate = $this->buy(Krate::find($request->krate["id"]));
+        $myKrate = $this->buy(Krate::find($request->id));
         Log::info("Here is the krate collection");
         Log::info($myKrate);
         
