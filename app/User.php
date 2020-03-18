@@ -53,6 +53,8 @@ class User extends SparkUser
         'uses_two_factor_auth' => 'boolean',
     ];
 
+    //protected $with = ['requests'];
+
     public function is_coaching(){
         return $this->belongsToMany('App\Challenge','challenge_coach', 'coach_id', 'challenge_id');
     }
@@ -133,6 +135,10 @@ class User extends SparkUser
         $this->kratespaces()->attach($space);
 
         return $this;
+    }
+
+    public function requests(){
+        return $this->hasMany('App\JoinRequest');
     }
 
     // ngrok http -subdomain=andogrando -host-header=rewrite thirtydays.test:80

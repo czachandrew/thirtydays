@@ -29,7 +29,7 @@ class ProgressionController extends Controller
 
 	public function superdata(){
 		$user = Auth::user();
-		$user->load('progression','rewards', 'krates','kratespaces', 'kratespaces.groups', 'kratespaces.groups.tasks','usertasks');
+		$user->load('progression','rewards', 'krates','kratespaces', 'kratespaces.groups', 'kratespaces.groups.tasks','usertasks', 'requests');
 		$user->myKrates = $user->openableKrates->groupBy('krate.title');
 		$user->rewards()->orderBy('user_reward.id', 'desc')->get();
 		$friends = $user->getFriends();

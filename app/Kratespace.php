@@ -12,6 +12,8 @@ class Kratespace extends Model
 
     protected $guarded = [];
 
+    protected $with = ['rewards','requests'];
+
     public function owner(){
         return $this->belongsTo('App\User');
     }
@@ -37,7 +39,7 @@ class Kratespace extends Model
     }
 
     public function rewards(){
-        return $this->hasMany('App\Reward', 'provider_id');
+        return $this->hasManyThrough('App\Reward', 'App\User','id','provider_id', 'id', 'id' );
     }
 
     public function krates(){
@@ -54,6 +56,10 @@ class Kratespace extends Model
         $this->increment('space_xp', $number);
         //$this->space_xp += $amount; 
         return $this;
+    }
+
+    public function requests(){
+        return $this->hasMany('App\JoinRequest');
     }
 
 }

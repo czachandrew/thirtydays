@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JoinRequest;
+use Log;
 
 class JoinRequestController extends Controller
 {
-    public function approve(JoinRequest $joinRequest){
-        $joinRequest->status = 'approved';
+    public function approve(JoinRequest $joinrequest){
+        Log::info($joinrequest);
+        $joinrequest->status = 'approved';
         //add the user to the kratespace
-        $user = $joinRequest->user;
-        $user->joinKratespace($joinRequest->kratespace_id);
+        $user = $joinrequest->user;
+        $user->joinKratespace($joinrequest->kratespace_id);
         return 'success'; 
     }
 }

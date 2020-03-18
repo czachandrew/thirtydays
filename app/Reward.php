@@ -38,5 +38,7 @@ class Reward extends Model
         return $this->morphMany('App\Media', 'mediable');
     }
 
+    
+
 
 }

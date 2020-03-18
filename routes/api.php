@@ -18,6 +18,8 @@ Route::group([
 
     Route::get('/provider/superdata', 'ProviderController@superdata');
 
+    Route::get('/provider/joinrequests/approve/{joinrequest}', 'JoinRequestController@approve');
+
     Route::post('/provider/task', 'TaskController@save');
 
     Route::delete('/provider/task/{task}', 'TaskController@delete');
