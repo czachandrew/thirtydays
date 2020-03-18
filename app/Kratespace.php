@@ -39,7 +39,7 @@ class Kratespace extends Model
     }
 
     public function rewards(){
-        return $this->hasManyThrough('App\Reward', 'App\User','id','provider_id', 'id', 'id' );
+        return $this->hasMany('App\Reward', 'provider_id');
     }
 
     public function krates(){
