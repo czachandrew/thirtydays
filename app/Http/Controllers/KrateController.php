@@ -135,7 +135,7 @@ class KrateController extends Controller
     }
 
     public function buyAndOpen( Request $request){
-        Log::info($request->krate['id']);
+        Log::info($request->id);
        // Log::info(Krate::find($request->krate["id"])->first());
 
         $myKrate = $this->buy(Krate::find($request->id));
