@@ -42,7 +42,7 @@ class RewardController extends Controller
     public function create(Request $request){
     	$user = Auth::user();
     	$reward = $request->reward;
-    	$reward['provider_id'] = $user->id;
+    	$reward['provider_id'] = $user->mykratespace->id;
     	$reward = Reward::create($reward);
     	return $reward;
     }

@@ -23,7 +23,7 @@ class Reward extends Model
     }
 
     public function provider(){
-    	return $this->belongsTo('App\User', 'provider_id');
+    	return $this->belongsTo('App\Kratespace', 'provider_id');
     }
 
     public function addStock($interval){
