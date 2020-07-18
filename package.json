@@ -15,7 +15,7 @@
     "emoji-mart-vue": "^2.6.6",
     "jquery": "^3.4.0",
     "laravel-mix": "^4.0.15",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "moment": "^2.10.6",
     "popper.js": "^1.12",
     "promise": "^7.1.1",
